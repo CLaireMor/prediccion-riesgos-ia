@@ -8,42 +8,32 @@ from sklearn.model_selection import train_test_split
 @st.cache_resource
 def cargar_y_entrenar():
     try:
-        # Cargamos los datos
-        df = pd.read_csv('obs_salud1.csv', sep=';', encoding='latin-1')
+        # --- CAMBIO 1: Lectura Inteligente ---
+        # sep=None y engine='python' hacen que Pandas adivine si es coma o punto y coma
+        df = pd.read_csv('obs_salud1.csv', sep=None, engine='python', encoding='latin-1')
+
+        # --- CAMBIO 2: El Chivato (Debugging) ---
+        # Esto imprimirá en tu página web los nombres exactos de las columnas
+        st.write("👀 COLUMNAS DETECTADAS:", df.columns.tolist())
+        st.write("📋 Vista previa de datos:", df.head(3))
+        # ----------------------------------------
+
+        # Renombrado (Asegúrate de que estos nombres coincidan con lo que verás en pantalla)
+        # Nota: He agregado .strip() para borrar espacios invisibles que causan errores
+        df.columns = [c.strip() for c in df.columns] 
         
+        df.rename(columns={
+            'Tipo de lesión o Sistema Comprometido': 'Lesion',
+            'Agente probablemente asociado': 'Agente',
+            'Ocupación': 'Ocupacion',
+            'Sexo': 'Sexo',
+            'Edad': 'Edad'
+        }, inplace=True)
+
         # Limpieza
         columnas_clave = ['Lesion', 'Agente', 'Ocupacion', 'Sexo', 'Edad']
-        df.dropna(subset=columnas_clave, inplace=True)
         
-        lesion_counts = df['Lesion'].value_counts()
-        df = df[~df['Lesion'].isin(lesion_counts[lesion_counts < 2].index)]
-
-        # Codificación
-        le_sexo = LabelEncoder()
-        le_agente = LabelEncoder()
-        le_ocupacion = LabelEncoder()
-        le_lesion = LabelEncoder()
-
-        df['Sexo_Num'] = le_sexo.fit_transform(df['Sexo'])
-        df['Agente_Num'] = le_agente.fit_transform(df['Agente'])
-        df['Ocupacion_Num'] = le_ocupacion.fit_transform(df['Ocupacion'])
-        Y = le_lesion.fit_transform(df['Lesion'])
-
-        X = df[['Edad', 'Sexo_Num', 'Agente_Num', 'Ocupacion_Num']]
-
-        # Escalado
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X)
-
-        # Entrenamiento
-        modelo = MLPClassifier(hidden_layer_sizes=(100, 50), activation='relu', 
-                               solver='adam', max_iter=500, random_state=42)
-        modelo.fit(X_scaled, Y)
-
-        return modelo, scaler, le_sexo, le_agente, le_ocupacion, le_lesion
-    except Exception as e:
-        st.error(f"🔥 ERROR REAL: {e}") # ¡Esto nos dirá qué está pasando en verdad!
-        return None, None, None, None, None, None
+        # ... (El resto del código sigue igual hacia abajo)
 
 # --- 2. EJECUTAR LA CARGA (COCINAR EL PASTEL) ---
 # ¡Esto debe ir DESPUÉS de definir la función de arriba!
