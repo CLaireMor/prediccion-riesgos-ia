@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 # --- 1. DEFINIR LA FUNCIÓN DE ENTRENAMIENTO (LA RECETA) ---
 @st.cache_resource
-st.set_page_config(page_title="Predicción de Riesgos", page_icon=)
+st.set_page_config(page_title="Predicción de Riesgos")
 
 st.write("✅ La app se está ejecutando hasta aquí.")
 
