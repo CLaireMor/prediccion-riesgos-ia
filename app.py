@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
-import plotly.express as px   # 👈 para gráfico dinámico
+import plotly.express as px   # gráfico dinámico
 
 
 # ----------------------------
@@ -93,7 +94,7 @@ def interfaz_web():
     )
     st.markdown("---")
 
-    # Entrenar / cargar modelo (solo la primera vez, gracias a @st.cache_resource)
+    # Entrenar / cargar modelo (solo la primera vez gracias al cache)
     with st.spinner("Cargando modelo de IA... (solo la primera vez)"):
         (
             modelo_nn,
@@ -107,26 +108,22 @@ def interfaz_web():
     # Layout: formulario y resultados
     col_form, col_result = st.columns([1, 1])
 
-    # -------- FORMULARIO: SOLO DATOS DEL TRABAJADOR --------
+    # -------- FORMULARIO: DATOS DEL TRABAJADOR --------
     with col_form:
         st.subheader("🧍 Datos del trabajador")
 
-        # Si quieres SOLO listas desplegables, quita el slider de edad
         edad = st.slider("Edad", 18, 80, 30)
-
         sexo = st.selectbox("Sexo", sorted(le_sexo.classes_))
         ocupacion = st.selectbox("Ocupación", sorted(le_ocupacion.classes_))
         agente = st.selectbox("Agente", sorted(le_agente.classes_))
 
         analizar = st.button("🔎 Analizar riesgo")
 
-    probs = None
-    top_indices = None
-    labels_top = []
-    values_top = []
+    top3 = None  # DataFrame con el top 3
 
     # -------- PREDICCIÓN --------
     if analizar:
+        # Datos del trabajador
         nuevo_dato = pd.DataFrame(
             [
                 {
@@ -138,6 +135,7 @@ def interfaz_web():
             ]
         )
 
+        # Transformar (Codificar y Escalar)
         nuevo_dato["Sexo_Num"] = le_sexo.transform(nuevo_dato["Sexo"])
         nuevo_dato["Ocupacion_Num"] = le_ocupacion.transform(
             nuevo_dato["Ocupacion"]
@@ -147,33 +145,44 @@ def interfaz_web():
         X_nuevo = nuevo_dato[["Edad", "Sexo_Num", "Agente_Num", "Ocupacion_Num"]]
         X_nuevo_scaled = scaler.transform(X_nuevo)
 
-        probs = modelo_nn.predict_proba(X_nuevo_scaled)[0]
-        top_indices = probs.argsort()[-3:][::-1]
+        # Probabilidades para cada clase del modelo
+        probs = modelo_nn.predict_proba(X_nuevo_scaled)[0]  # array 1D
+        clases_modelo = modelo_nn.classes_                   # ej. [0,1,2,...]
 
-        for i in top_indices:
-            lesion = le_lesion.inverse_transform([i])[0]
-            prob = probs[i]
-            labels_top.append(lesion)
-            values_top.append(prob)
+        # Mapear clases numéricas -> nombre de lesión
+        etiquetas_todas = le_lesion.inverse_transform(clases_modelo.astype(int))
+
+        # DataFrame con todas las lesiones y sus probabilidades
+        df_probs = pd.DataFrame({
+            "Lesion": etiquetas_todas,
+            "Probabilidad": probs
+        })
+
+        # Ordenar de mayor a menor y tomar top 3
+        top3 = df_probs.sort_values("Probabilidad", ascending=False).head(3)
 
     # -------- RESULTADOS --------
     with col_result:
         st.subheader("📊 Resultados")
 
-        if probs is None:
+        if top3 is None:
             st.info("Pulsa **Analizar riesgo** para ver la predicción.")
         else:
             st.markdown("### 🔝 3 lesiones más probables")
-            for lesion, prob in zip(labels_top, values_top):
+
+            for _, fila in top3.iterrows():
+                lesion = fila["Lesion"]
+                prob = fila["Probabilidad"]
                 st.write(f"**{lesion}**: {prob:.1%}")
                 st.progress(int(prob * 100))
 
-            # Gráfico dinámico con Plotly
+            # Gráfico dinámico con Plotly usando el MISMO DataFrame
             st.markdown("### 🥧 Distribución de riesgo (Top 3)")
 
             fig = px.pie(
-                values=values_top,
-                names=labels_top,
+                top3,
+                values="Probabilidad",
+                names="Lesion",
                 hole=0.3,
                 title="Distribución de riesgo",
             )
