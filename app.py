@@ -6,6 +6,10 @@ from sklearn.model_selection import train_test_split
 
 # --- 1. DEFINIR LA FUNCIÓN DE ENTRENAMIENTO (LA RECETA) ---
 @st.cache_resource
+st.set_page_config(page_title="Predicción de Riesgos", page_icon="🏥")
+
+st.write("✅ La app se está ejecutando hasta aquí.")
+
 def cargar_y_entrenar():
     try:
         df = pd.read_csv('obs_salud1.csv', sep=None, engine='python', encoding='latin-1')
@@ -70,3 +74,5 @@ def cargar_y_entrenar():
         st.error("❌ No se encontró 'obs_salud1.csv'. Pon el archivo en la misma carpeta del script.")
         # Devolvemos Nones para que la interfaz lo pueda manejar
         return None, None, None, None, None, None
+    # --- 4. PUNTO DE ENTRADA ---
+    interfaz_web() 
