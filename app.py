@@ -42,6 +42,7 @@ def cargar_y_entrenar():
 
         return modelo, scaler, le_sexo, le_agente, le_ocupacion, le_lesion
     except Exception as e:
+        st.error(f"🔥 ERROR REAL: {e}") # ¡Esto nos dirá qué está pasando en verdad!
         return None, None, None, None, None, None
 
 # --- 2. EJECUTAR LA CARGA (COCINAR EL PASTEL) ---
@@ -99,4 +100,3 @@ def interfaz_web():
 # --- 4. PUNTO DE ENTRADA ---
 if __name__ == '__main__':
     interfaz_web()
-    
