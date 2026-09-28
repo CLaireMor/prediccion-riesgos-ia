@@ -45,3 +45,15 @@ def test_top_lesiones_ordenado(res):
     top = m.top_lesiones(res, fila[m.FEATURES].to_dict(), k=5)
     assert len(top) == 5
     assert top["Probabilidad"].is_monotonic_decreasing
+
+
+def test_exportacion_web_coincide_con_sklearn(res):
+    import numpy as np
+
+    import exportar_web as ew
+
+    mod = ew.exportar_modelo(res)
+    muestra = res.datos[m.FEATURES].sample(50, random_state=1)
+    esperado = m.predecir(res, muestra).to_numpy()
+    obtenido = np.array([ew.predecir_desde_json(mod, r) for r in muestra.to_dict("records")])
+    assert np.abs(esperado - obtenido).max() < 1e-3

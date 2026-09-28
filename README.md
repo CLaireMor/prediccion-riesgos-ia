@@ -10,6 +10,19 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 
+### Versión web (sin servidor)
+
+`web/index.html` es la misma app en una sola página que corre en el navegador: incluye los
+coeficientes del modelo y tablas **agregadas** (ningún registro individual). Se abre con doble clic
+o se puede publicar en cualquier hosting estático (GitHub Pages, Netlify…). Para regenerarla
+después de cambiar datos o modelo:
+
+```bash
+python exportar_web.py   # verifica que la predicción del navegador coincide con scikit-learn
+```
+
+La interfaz se edita en `web/plantilla.html`; `web/index.html` es el archivo generado.
+
 ## Pestañas
 
 | Pestaña | Para qué sirve |
@@ -74,6 +87,8 @@ los casos se codificó como "Otros trastornos de tejidos blandos", frente a 5 % 
 ```
 app.py          # interfaz Streamlit
 modelo.py       # carga, limpieza, entrenamiento, evaluación y predicción
+exportar_web.py # genera web/index.html (versión web autónoma)
+web/            # plantilla.html (fuente) e index.html (generado)
 tests/          # pruebas (pip install -r requirements-dev.txt && pytest)
 obs_salud1.csv  # datos (separador ";" y codificación latin-1)
 ```
