@@ -1,0 +1,431 @@
+{
+  "dimension_antes": [
+    22438,
+    14
+  ],
+  "dimension_limpio": [
+    22167,
+    14
+  ],
+  "dimension_transformado": [
+    22167,
+    168
+  ],
+  "estructura_antes": [
+    {
+      "Variable": "Anio",
+      "Tipo": "numérica",
+      "dtype": "int64",
+      "Nulos": 0,
+      "Distintos": 9,
+      "Ejemplo": "2019"
+    },
+    {
+      "Variable": "Localidad",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 20,
+      "Ejemplo": "Tunjuelito"
+    },
+    {
+      "Variable": "Sexo",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 3,
+      "Ejemplo": "Femenino"
+    },
+    {
+      "Variable": "Edad",
+      "Tipo": "numérica",
+      "dtype": "int64",
+      "Nulos": 0,
+      "Distintos": 76,
+      "Ejemplo": "63"
+    },
+    {
+      "Variable": "Regimen",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 1,
+      "Distintos": 7,
+      "Ejemplo": "Contributivo"
+    },
+    {
+      "Variable": "Escolaridad",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 1,
+      "Distintos": 12,
+      "Ejemplo": "Secundaria Incompleta"
+    },
+    {
+      "Variable": "Ocupacion",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 6,
+      "Distintos": 228,
+      "Ejemplo": "Zapateros Y Afines"
+    },
+    {
+      "Variable": "TipoUTI",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 2,
+      "Ejemplo": "Tipo II-Producción"
+    },
+    {
+      "Variable": "ClaseUTI",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 1,
+      "Distintos": 2,
+      "Ejemplo": "Fija"
+    },
+    {
+      "Variable": "Ingresos",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 5,
+      "Ejemplo": "1 SMMLV"
+    },
+    {
+      "Variable": "FormaPago",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 5,
+      "Ejemplo": "A destajo"
+    },
+    {
+      "Variable": "Sintoma",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 232,
+      "Ejemplo": "Dificultad Para Respirar / Ahogo"
+    },
+    {
+      "Variable": "Agente",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 76,
+      "Ejemplo": "Exposición A Otras Sustancias Químicas"
+    },
+    {
+      "Variable": "Lesion",
+      "Tipo": "categórica",
+      "dtype": "str",
+      "Nulos": 0,
+      "Distintos": 61,
+      "Ejemplo": "Afecciones de vía respiratoria baja "
+    }
+  ],
+  "estructura_despues": [
+    {
+      "Variable": "Anio",
+      "Tipo": "numérica",
+      "dtype": "int64",
+      "Nulos": 0,
+      "Distintos": 9,
+      "Ejemplo": "2019"
+    },
+    {
+      "Variable": "Localidad",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 20,
+      "Ejemplo": "Tunjuelito"
+    },
+    {
+      "Variable": "Sexo",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 3,
+      "Ejemplo": "Femenino"
+    },
+    {
+      "Variable": "Edad",
+      "Tipo": "numérica",
+      "dtype": "int64",
+      "Nulos": 0,
+      "Distintos": 76,
+      "Ejemplo": "63"
+    },
+    {
+      "Variable": "Regimen",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 6,
+      "Ejemplo": "Contributivo"
+    },
+    {
+      "Variable": "Escolaridad",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 12,
+      "Ejemplo": "Secundaria Incompleta"
+    },
+    {
+      "Variable": "Ocupacion",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 228,
+      "Ejemplo": "Zapateros Y Afines"
+    },
+    {
+      "Variable": "TipoUTI",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 2,
+      "Ejemplo": "Tipo II-Producción"
+    },
+    {
+      "Variable": "ClaseUTI",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 2,
+      "Ejemplo": "Fija"
+    },
+    {
+      "Variable": "Ingresos",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 4,
+      "Ejemplo": "1 SMMLV"
+    },
+    {
+      "Variable": "FormaPago",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 4,
+      "Ejemplo": "A destajo"
+    },
+    {
+      "Variable": "Sintoma",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 227,
+      "Ejemplo": "Dificultad Para Respirar / Ahogo"
+    },
+    {
+      "Variable": "Agente",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 76,
+      "Ejemplo": "Exposición A Otras Sustancias Químicas"
+    },
+    {
+      "Variable": "Lesion",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 60,
+      "Ejemplo": "Afecciones de vía respiratoria baja"
+    },
+    {
+      "Variable": "Lesion_Modelo",
+      "Tipo": "categórica",
+      "dtype": "string",
+      "Nulos": 0,
+      "Distintos": 26,
+      "Ejemplo": "Afecciones de vía respiratoria baja"
+    }
+  ],
+  "pasos": [
+    {
+      "paso": "Normalizar espacios en textos",
+      "detalle": {
+        "Regimen": "7 → 6 categorías",
+        "Sintoma": "232 → 227 categorías"
+      }
+    },
+    {
+      "paso": "Valores sin sentido ('0', 'NS / NR') marcados como faltantes",
+      "detalle": {
+        "FormaPago": 1,
+        "Lesion": 1,
+        "Ingresos (NS / NR)": 15
+      }
+    },
+    {
+      "paso": "Rangos numéricos verificados (sin valores imposibles)",
+      "detalle": {
+        "Edad": [
+          15,
+          95
+        ],
+        "Anio": [
+          2017,
+          2025
+        ]
+      }
+    },
+    {
+      "paso": "Eliminar duplicados exactos (14 variables idénticas)",
+      "detalle": {
+        "filas eliminadas": 264
+      }
+    },
+    {
+      "paso": "Tratar faltantes",
+      "detalle": {
+        "nulos detectados": {
+          "Regimen": 1,
+          "Escolaridad": 1,
+          "Ocupacion": 6,
+          "ClaseUTI": 1,
+          "Ingresos": 12,
+          "FormaPago": 1,
+          "Lesion": 1
+        },
+        "filas eliminadas (variable clave u objetivo)": 7,
+        "imputación por moda": {
+          "Regimen": {
+            "n": 1,
+            "moda": "Contributivo"
+          },
+          "Escolaridad": {
+            "n": 1,
+            "moda": "Secundaria Completa"
+          },
+          "ClaseUTI": {
+            "n": 1,
+            "moda": "Fija"
+          },
+          "Ingresos": {
+            "n": 12,
+            "moda": "1 SMMLV"
+          },
+          "FormaPago": {
+            "n": 1,
+            "moda": "A destajo"
+          }
+        }
+      }
+    },
+    {
+      "paso": "Agrupar clases raras del objetivo",
+      "detalle": {
+        "clases antes": 60,
+        "clases después": 26,
+        "registros agrupados": 114
+      }
+    }
+  ],
+  "bloques_transformados": {
+    "onehot": 163,
+    "ordinal": 2,
+    "zscore": 1,
+    "minmax": 1
+  },
+  "columnas_onehot": {
+    "Sexo": 3,
+    "Localidad": 20,
+    "Regimen": 6,
+    "Ocupacion": 84,
+    "TipoUTI": 2,
+    "ClaseUTI": 2,
+    "FormaPago": 3,
+    "Agente": 43
+  },
+  "orden_escolaridad": [
+    "No Fue A La Escuela",
+    "Primaria Incompleta",
+    "Primaria Completa",
+    "Secundaria Incompleta",
+    "Secundaria Completa",
+    "Técnico Pos Secundaria Incompleto",
+    "Técnico Pos Secundaria",
+    "Técnico Pos Secundaria Completo",
+    "Universidad Incompleta",
+    "Universidad Completa",
+    "Posgrado Incompleto",
+    "Posgrado Completo"
+  ],
+  "orden_ingresos": [
+    "Menos de 1 SMMLV",
+    "1 SMMLV",
+    "Entre 1 y 2 SMMLV",
+    "2 y MÁS SMMLV"
+  ],
+  "escalado": {
+    "Edad (original)": {
+      "media": 44.587,
+      "de": 13.777,
+      "min": 15.0,
+      "max": 95.0
+    },
+    "Edad (Z-score)": {
+      "media": -0.0,
+      "de": 1.0,
+      "min": -2.148,
+      "max": 3.659
+    },
+    "Año (original)": {
+      "media": 2021.178,
+      "de": 2.096,
+      "min": 2017.0,
+      "max": 2025.0
+    },
+    "Año (Min-Max)": {
+      "media": 0.522,
+      "de": 0.262,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Escolaridad (ordinal 0–1)": {
+      "media": 0.372,
+      "de": 0.185,
+      "min": 0.0,
+      "max": 1.0
+    },
+    "Ingresos (ordinal 0–1)": {
+      "media": 0.376,
+      "de": 0.246,
+      "min": 0.0,
+      "max": 1.0
+    }
+  },
+  "atipicos": {
+    "limite_superior_iqr": 86.5,
+    "atipicos_edad": 7
+  },
+  "correlacion_edad_escolaridad": -0.302,
+  "impacto_modelo": [
+    {
+      "Tratamiento": "Original: LabelEncoder + MLP (sin depurar)",
+      "top1": 0.364,
+      "top3": 0.7197,
+      "log_loss": 1.8829
+    },
+    {
+      "Tratamiento": "Depurado: One-Hot + Z-score + Regresión logística",
+      "top1": 0.431,
+      "top3": 0.7826,
+      "log_loss": 1.6344
+    },
+    {
+      "Tratamiento": "Línea base: predecir la prevalencia",
+      "top1": 0.1894,
+      "top3": 0.4599,
+      "log_loss": 2.6259
+    }
+  ],
+  "menores_18": 33
+}

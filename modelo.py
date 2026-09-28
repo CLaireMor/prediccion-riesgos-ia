@@ -74,6 +74,9 @@ def cargar_datos(ruta=RUTA_DATOS) -> pd.DataFrame:
         # "0" aparece como valor basura en algunas columnas de texto
         df.loc[df[col].isin(["0", ""]), col] = pd.NA
 
+    # Registros idénticos en las 14 variables (incluidos edad y síntoma) se
+    # tratan como notificaciones repetidas del mismo caso.
+    df = df.drop_duplicates()
     df = df.dropna(subset=FEATURES + [OBJETIVO]).copy()
 
     frecuencias = df[OBJETIVO].value_counts()
