@@ -1,0 +1,1015 @@
+<title>Riesgo Laboral Informal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f4f6f4;
+  --surface: #fcfdfc;
+  --sunken: #eaeeeb;
+  --ink: #15201b;
+  --ink-2: #4b5852;
+  --ink-3: #75817b;
+  --rule: #d5ddd8;
+  --accent: #0b6b5c;
+  --accent-ink: #ffffff;
+  --accent-soft: #dcefe9;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --s4: #eda100;
+  --s5: #e87ba4;
+  --ref: #b9c2bd;
+  --warn-bg: #fff3dc;
+  --warn-ink: #7a4a00;
+  --crit-bg: #fde6e4;
+  --crit-ink: #8e1f1a;
+  --info-bg: #e3eefb;
+  --info-ink: #1c4f8c;
+  --display: "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #101412;
+    --surface: #171c19;
+    --sunken: #1f2522;
+    --ink: #eef3f0;
+    --ink-2: #b1bdb7;
+    --ink-3: #85918b;
+    --rule: #2d3531;
+    --accent: #3fb59d;
+    --accent-ink: #06201a;
+    --accent-soft: #173a32;
+    --s1: #3987e5;
+    --s2: #d95926;
+    --s3: #199e70;
+    --s4: #c98500;
+    --s5: #d55181;
+    --ref: #4a544f;
+    --warn-bg: #3a2a0c;
+    --warn-ink: #f5c979;
+    --crit-bg: #3d1614;
+    --crit-ink: #f4a9a3;
+    --info-bg: #14263d;
+    --info-ink: #9fc6f5;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101412;
+  --surface: #171c19;
+  --sunken: #1f2522;
+  --ink: #eef3f0;
+  --ink-2: #b1bdb7;
+  --ink-3: #85918b;
+  --rule: #2d3531;
+  --accent: #3fb59d;
+  --accent-ink: #06201a;
+  --accent-soft: #173a32;
+  --s1: #3987e5;
+  --s2: #d95926;
+  --s3: #199e70;
+  --s4: #c98500;
+  --s5: #d55181;
+  --ref: #4a544f;
+  --warn-bg: #3a2a0c;
+  --warn-ink: #f5c979;
+  --crit-bg: #3d1614;
+  --crit-ink: #f4a9a3;
+  --info-bg: #14263d;
+  --info-ink: #9fc6f5;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 var(--body);
+  padding-inline: 16px;
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1180px; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h2 { font-size: 1.35rem; font-weight: 700; font-stretch: 85%; letter-spacing: -0.005em; }
+h3 { font-size: 1rem; font-weight: 700; font-stretch: 90%; }
+p { margin: 0; max-width: 68ch; }
+.muted { color: var(--ink-2); }
+.small { font-size: 0.82rem; }
+.num { font-variant-numeric: tabular-nums; }
+.label {
+  font: 500 0.7rem/1.2 var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+
+/* ---------- Cabecera ---------- */
+header.top {
+  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between;
+  gap: 12px 32px; padding-block: 28px 18px; border-bottom: 1px solid var(--rule);
+}
+header.top h1 {
+  font-size: clamp(1.9rem, 4.6vw, 2.8rem); font-weight: 800; font-stretch: 78%;
+  line-height: 0.98; letter-spacing: -0.01em;
+}
+header.top h1 span { color: var(--accent); }
+.stamp {
+  display: grid; grid-template-columns: auto auto; gap: 2px 14px;
+  font: 0.78rem/1.4 var(--mono); color: var(--ink-2);
+  border: 1px solid var(--rule); border-radius: 4px; padding: 8px 12px; background: var(--surface);
+}
+.stamp b { font-weight: 500; color: var(--ink); text-align: right; }
+
+/* ---------- Pestañas ---------- */
+nav.tabs {
+  display: flex; gap: 4px; overflow-x: auto; padding-block: 10px;
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  border-bottom: 1px solid var(--rule); scrollbar-width: none;
+}
+nav.tabs button {
+  flex: none; font: 600 0.9rem/1 var(--body); color: var(--ink-2);
+  background: transparent; border: 1px solid transparent; border-radius: 999px;
+  padding: 9px 14px; cursor: pointer;
+}
+nav.tabs button:hover { color: var(--ink); background: var(--sunken); }
+nav.tabs button[aria-selected="true"] { color: var(--accent-ink); background: var(--accent); }
+button:focus-visible, select:focus-visible, input:focus-visible, th button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+section.panel { padding-block: 24px; display: grid; gap: 22px; }
+.intro { display: grid; gap: 6px; }
+
+/* ---------- Formularios ---------- */
+.ficha {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+  display: grid; gap: 0; align-self: start;
+}
+.ficha .field { display: grid; gap: 6px; padding: 14px 16px; border-bottom: 1px dashed var(--rule); }
+.ficha .field:last-child { border-bottom: 0; }
+.ficha .head { padding: 12px 16px; border-bottom: 1px solid var(--rule); display: flex; justify-content: space-between; align-items: baseline; }
+label.lbl { font: 600 0.8rem/1.2 var(--body); color: var(--ink-2); }
+select, input[type="number"] {
+  width: 100%; font: 0.92rem/1.3 var(--body); color: var(--ink);
+  background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: 9px 10px;
+}
+.row-inline { display: flex; align-items: center; gap: 12px; }
+input[type="range"] { flex: 1; accent-color: var(--accent); }
+.edad-val { font: 500 1.3rem/1 var(--mono); min-width: 3ch; text-align: right; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 0.85rem; color: var(--ink-2); }
+.check input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: end; }
+.filters .f { display: grid; gap: 5px; min-width: 150px; flex: 1 1 150px; max-width: 260px; }
+
+/* ---------- Layout ---------- */
+.pred-grid { display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 22px; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 860px) {
+  .pred-grid, .two { grid-template-columns: minmax(0, 1fr); }
+}
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.card-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+
+/* ---------- Resultados ---------- */
+.ranking { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.ranking li {
+  display: grid; grid-template-columns: 2.2rem minmax(0, 1fr) auto; gap: 4px 12px; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--rule);
+}
+.ranking li:last-child { border-bottom: 0; }
+.ranking .pos { font: 500 0.8rem/1 var(--mono); color: var(--ink-3); }
+.ranking .name { font-weight: 600; }
+.ranking .prob { font: 500 1.1rem/1 var(--mono); text-align: right; }
+.ranking .bar { grid-column: 2 / 4; height: 6px; background: var(--sunken); border-radius: 3px; overflow: hidden; }
+.ranking .bar i { display: block; height: 100%; background: var(--s1); border-radius: 3px; }
+.ranking .lift { grid-column: 2 / 4; font-size: 0.8rem; color: var(--ink-2); }
+.chip {
+  display: inline-flex; align-items: center; gap: 4px; font: 500 0.72rem/1 var(--mono);
+  padding: 3px 7px; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink-2); white-space: nowrap;
+}
+.chip.up { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+.alert { border-radius: 6px; padding: 10px 12px; font-size: 0.86rem; display: flex; gap: 10px; align-items: flex-start; }
+.alert b { font-weight: 600; }
+.alert.warn { background: var(--warn-bg); color: var(--warn-ink); }
+.alert.crit { background: var(--crit-bg); color: var(--crit-ink); }
+.alert.info { background: var(--info-bg); color: var(--info-ink); }
+.alert .ico { font: 700 0.8rem/1.4 var(--mono); flex: none; }
+
+.note { border-left: 3px solid var(--rule); padding: 2px 0 2px 12px; font-size: 0.84rem; color: var(--ink-2); max-width: 90ch; }
+
+/* ---------- Tablas ---------- */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+.tbl-wrap.tall { max-height: 520px; overflow-y: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+table.ancha { min-width: 720px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font: 600 0.74rem/1.2 var(--body); color: var(--ink-2); background: var(--sunken); position: sticky; top: 0; white-space: nowrap; }
+td.n, th.n { white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 0.8rem; }
+tbody tr:hover td { background: var(--sunken); }
+th button { all: unset; cursor: pointer; }
+th button::after { content: " ↕"; color: var(--ink-3); }
+th button[data-dir="desc"]::after { content: " ↓"; color: var(--accent); }
+th button[data-dir="asc"]::after { content: " ↑"; color: var(--accent); }
+
+/* ---------- Gráficos ---------- */
+.chart { width: 100%; position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { fill: var(--ink-2); font: 11px var(--body); }
+.chart .axis text { fill: var(--ink-3); font: 10.5px var(--mono); }
+.chart .grid line { stroke: var(--rule); stroke-width: 1; }
+.chart .base { stroke: var(--ink-3); stroke-width: 1; }
+.chart .hit { fill: transparent; cursor: default; }
+.chart .mark { transition: opacity .12s; }
+.chart .dim .mark { opacity: 0.45; }
+.chart .dim .mark.on { opacity: 1; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 10px; border-radius: 2px; display: inline-block; }
+.legend i.ln { height: 2px; border-radius: 1px; width: 16px; }
+#tip {
+  position: fixed; pointer-events: none; z-index: 50; background: var(--surface); color: var(--ink);
+  border: 1px solid var(--rule); border-radius: 6px; padding: 8px 10px; font-size: 0.8rem;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.14); max-width: 300px; display: grid; gap: 4px;
+}
+#tip .t { font-weight: 600; font-size: 0.78rem; color: var(--ink-2); }
+#tip .r { display: flex; gap: 8px; align-items: center; }
+#tip .r i { width: 12px; height: 2px; flex: none; }
+#tip .r b { font: 500 0.85rem var(--mono); }
+
+.kpis { display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.kpi { display: grid; gap: 2px; }
+.kpi b { font: 500 1.5rem/1.1 var(--mono); }
+
+.btn {
+  font: 600 0.86rem/1 var(--body); padding: 10px 14px; border-radius: 4px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink);
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.drop {
+  border: 1.5px dashed var(--rule); border-radius: 6px; padding: 22px; display: grid; gap: 10px;
+  justify-items: start; background: var(--surface);
+}
+.drop.over { border-color: var(--accent); background: var(--accent-soft); }
+code { font: 0.82rem var(--mono); background: var(--sunken); padding: 1px 5px; border-radius: 3px; }
+textarea { width: 100%; min-height: 120px; font: 0.8rem var(--mono); background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; padding: 8px; }
+footer { border-top: 1px solid var(--rule); padding-top: 14px; margin-top: 12px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div style="display:grid;gap:8px">
+      <div class="label">Vigilancia en salud · trabajo informal · Bogotá</div>
+      <h1>Riesgo laboral<br><span>informal</span></h1>
+    </div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" id="t-prediccion" data-tab="prediccion" aria-selected="true">Predicción</button>
+    <button role="tab" id="t-lotes" data-tab="lotes" aria-selected="false">Por lotes</button>
+    <button role="tab" id="t-vigilancia" data-tab="vigilancia" aria-selected="false">Vigilancia</button>
+    <button role="tab" id="t-priorizacion" data-tab="priorizacion" aria-selected="false">Priorización</button>
+    <button role="tab" id="t-confiabilidad" data-tab="confiabilidad" aria-selected="false">Confiabilidad</button>
+  </nav>
+
+  <!-- ===================== PREDICCIÓN ===================== -->
+  <section class="panel" id="p-prediccion" role="tabpanel" aria-labelledby="t-prediccion">
+    <div class="pred-grid">
+      <form class="ficha" id="ficha" autocomplete="off">
+        <div class="head"><h3>Datos del trabajador</h3><span class="label">Ficha</span></div>
+        <div class="field">
+          <label class="lbl" for="edad">Edad</label>
+          <div class="row-inline">
+            <input type="range" id="edad" min="14" max="95" value="45">
+            <span class="edad-val num" id="edad-val">45</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="lbl" for="sexo">Sexo</label>
+          <select id="sexo"></select>
+        </div>
+        <div class="field">
+          <label class="lbl" for="ocupacion">Ocupación</label>
+          <select id="ocupacion"></select>
+        </div>
+        <div class="field">
+          <label class="lbl" for="agente">Agente de riesgo</label>
+          <select id="agente"></select>
+          <label class="check"><input type="checkbox" id="solo-reg" checked> Solo agentes registrados en esta ocupación</label>
+        </div>
+        <div class="field">
+          <label class="lbl" for="k">Lesiones a mostrar</label>
+          <div class="row-inline">
+            <input type="range" id="k" min="3" max="10" value="5">
+            <span class="edad-val num" id="k-val">5</span>
+          </div>
+        </div>
+      </form>
+
+      <div style="display:grid;gap:18px;min-width:0">
+        <div id="alertas" style="display:grid;gap:8px"></div>
+        <div class="card">
+          <div class="card-head">
+            <h2>Lesiones más probables</h2>
+            <span class="label">Si el trabajador llega a ser un caso</span>
+          </div>
+          <ol class="ranking" id="ranking"></ol>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3>Este perfil frente al total de casos</h3>
+            <div class="legend"><span><i style="background:var(--s1)"></i>Este perfil</span><span><i style="background:var(--ref)"></i>Todos los casos</span></div>
+          </div>
+          <div class="chart" id="ch-perfil"></div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3 id="sim-titulo">Casos reales con la misma ocupación y agente</h3>
+          </div>
+          <div id="sim-aviso"></div>
+          <div class="tbl-wrap"><table id="sim-tabla"></table></div>
+        </div>
+      </div>
+    </div>
+    <p class="note">Estas probabilidades describen qué lesión es más probable <b>si el trabajador llega a ser un caso notificado</b>. Los datos contienen solo casos, así que no estiman la probabilidad de lesionarse. Es apoyo a la prevención, no un diagnóstico.</p>
+  </section>
+
+  <!-- ===================== LOTES ===================== -->
+  <section class="panel" id="p-lotes" role="tabpanel" aria-labelledby="t-lotes" hidden>
+    <div class="intro">
+      <h2>Predicción para muchos trabajadores</h2>
+      <p class="muted">Carga un CSV con las columnas <code>Edad</code>, <code>Sexo</code>, <code>Ocupacion</code> y <code>Agente</code>, con los mismos textos del observatorio. Sirve para tamizar una base de unidades de trabajo o planear una brigada. El archivo se procesa en tu navegador y no se envía a ningún lado.</p>
+    </div>
+    <div class="drop" id="drop">
+      <label class="btn" for="archivo" style="display:inline-block">Elegir archivo CSV</label>
+      <input type="file" id="archivo" accept=".csv,text/csv" hidden>
+      <span class="small muted">o arrástralo aquí. Separador <code>,</code> o <code>;</code>.</span>
+      <button class="btn ghost" type="button" id="ejemplo">Cargar ejemplo</button>
+    </div>
+    <div id="lotes-msg"></div>
+    <div id="lotes-res" hidden style="display:grid;gap:12px">
+      <div class="card-head">
+        <h3 id="lotes-titulo"></h3>
+        <button class="btn ghost" type="button" id="copiar">Copiar resultados como CSV</button>
+      </div>
+      <div class="tbl-wrap tall"><table id="lotes-tabla" class="ancha"></table></div>
+      <textarea id="lotes-csv" hidden readonly aria-label="Resultados en CSV"></textarea>
+    </div>
+  </section>
+
+  <!-- ===================== VIGILANCIA ===================== -->
+  <section class="panel" id="p-vigilancia" role="tabpanel" aria-labelledby="t-vigilancia" hidden>
+    <div class="intro">
+      <h2>Vigilancia epidemiológica</h2>
+      <p class="muted">Qué se lesiona, por qué y en qué oficios. Los filtros aplican a todo lo que está debajo.</p>
+    </div>
+    <div class="filters">
+      <div class="f"><label class="lbl" for="v-desde">Desde</label><select id="v-desde"></select></div>
+      <div class="f"><label class="lbl" for="v-hasta">Hasta</label><select id="v-hasta"></select></div>
+      <div class="f"><label class="lbl" for="v-loc">Localidad</label><select id="v-loc"></select></div>
+      <div class="f"><label class="lbl" for="v-sexo">Sexo</label><select id="v-sexo"></select></div>
+    </div>
+    <div class="kpis" id="v-kpis"></div>
+    <div class="two">
+      <div class="card"><h3>Lesiones más frecuentes</h3><div class="chart" id="ch-lesiones"></div></div>
+      <div class="card"><h3>Agentes más frecuentes</h3><div class="chart" id="ch-agentes"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Evolución anual</h3><span class="label">% de los casos de cada año</span></div>
+      <div class="legend" id="lg-tendencia"></div>
+      <div class="chart" id="ch-tendencia"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Perfil de lesiones por ocupación</h3><span class="label">% de los casos de cada ocupación</span></div>
+      <div class="chart" id="ch-heat" style="overflow-x:auto"></div>
+    </div>
+  </section>
+
+  <!-- ===================== PRIORIZACIÓN ===================== -->
+  <section class="panel" id="p-priorizacion" role="tabpanel" aria-labelledby="t-priorizacion" hidden>
+    <div class="intro">
+      <h2>Dónde intervenir primero</h2>
+      <p class="muted">Cruza la carga de casos con la vulnerabilidad social de cada ocupación. Un trabajador sin aseguramiento y con ingresos bajo el mínimo tiene menos margen para recuperarse y acceder a atención.</p>
+    </div>
+    <div class="filters">
+      <div class="f" style="max-width:360px">
+        <label class="lbl" for="p-min">Mínimo de casos por ocupación: <span class="num" id="p-min-val">50</span></label>
+        <input type="range" id="p-min" min="10" max="300" step="10" value="50">
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Carga frente a vulnerabilidad</h3><span class="label">Arriba a la derecha = prioridad</span></div>
+      <div class="chart" id="ch-scatter"></div>
+    </div>
+    <div class="tbl-wrap tall"><table id="p-tabla" class="ancha"></table></div>
+    <p class="note">Índice de vulnerabilidad = promedio de % no asegurado, % con ingresos por debajo de 1 SMMLV y % de 65 años o más. Es una regla simple y transparente, no un índice validado; ajústala con el criterio del equipo de salud pública.</p>
+    <div class="card" id="menores"></div>
+  </section>
+
+  <!-- ===================== CONFIABILIDAD ===================== -->
+  <section class="panel" id="p-confiabilidad" role="tabpanel" aria-labelledby="t-confiabilidad" hidden>
+    <div class="intro">
+      <h2>¿Qué tan confiable es el modelo?</h2>
+      <p class="muted">El modelo solo aporta en la medida en que supera a la línea base: predecir siempre las lesiones más comunes sin mirar al trabajador.</p>
+    </div>
+    <div class="tbl-wrap"><table id="c-tabla" class="ancha"></table></div>
+    <div class="two">
+      <div class="card" style="align-content:start">
+        <h3>Cómo leer estas cifras</h3>
+        <p class="small muted" id="c-texto"></p>
+        <p class="small muted">El modelo es una regresión logística con Edad, Sexo, Ocupación y Agente. El agente de exposición es la variable más informativa. No usa Año ni Localidad: reflejan más la forma de registrar que el riesgo del trabajador.</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>Casos con categorías genéricas</h3><span class="label">"Otros…" / "Otras…" por año</span></div>
+        <div class="chart" id="ch-genericas"></div>
+        <p class="small muted">Los picos sugieren cambios en la codificación o en quién registra, no necesariamente en la salud de los trabajadores. Vale la pena revisarlo con el equipo de vigilancia.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="small muted">
+    Datos: observatorio de salud de Bogotá (<code>obs_salud1.csv</code>). La página solo contiene conteos agregados y los coeficientes del modelo, ningún registro individual. Código: <a href="https://github.com/CLaireMor/prediccion-riesgos-ia" style="color:var(--accent)">CLaireMor/prediccion-riesgos-ia</a>.
+  </footer>
+</div>
+<div id="tip" hidden></div>
+
+<script>
+const D = /*__DATOS__*/null;
+const DIC = D.dic;
+const $ = (s) => document.querySelector(s);
+const NS = "http://www.w3.org/2000/svg";
+const fmtN = new Intl.NumberFormat("es-CO");
+const pct = (x, d = 1) => (x * 100).toFixed(d).replace(".", ",") + " %";
+const SERIES = ["var(--s1)", "var(--s2)", "var(--s3)", "var(--s4)", "var(--s5)"];
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") e.className = v; else if (k === "text") e.textContent = v;
+    else if (k === "style") e.style.cssText = v; else e.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) e.append(k);
+  return e;
+}
+function sv(tag, attrs = {}) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  return e;
+}
+function opciones(select, valores, etiqueta = (v) => v) {
+  select.replaceChildren(...valores.map((v) => el("option", { value: v, text: etiqueta(v) })));
+}
+function corta(s, n) { return s.length > n ? s.slice(0, n - 1) + "…" : s; }
+
+/* ---------- Tooltip ---------- */
+const tip = $("#tip");
+function mostrarTip(ev, titulo, filas) {
+  tip.replaceChildren(el("div", { class: "t", text: titulo }),
+    ...filas.map(([color, valor, nombre]) => el("div", { class: "r" },
+      color ? el("i", { style: `background:${color}` }) : null, el("b", { text: valor }), nombre ? el("span", { class: "muted", text: nombre }) : null)));
+  tip.hidden = false;
+  const r = tip.getBoundingClientRect();
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
+}
+function ocultarTip() { tip.hidden = true; }
+function conTip(nodo, titulo, filas) {
+  nodo.setAttribute("tabindex", "0");
+  nodo.addEventListener("pointermove", (e) => mostrarTip(e, titulo, filas));
+  nodo.addEventListener("pointerleave", ocultarTip);
+  nodo.addEventListener("focus", () => { const b = nodo.getBoundingClientRect(); mostrarTip({ clientX: b.right, clientY: b.top }, titulo, filas); });
+  nodo.addEventListener("blur", ocultarTip);
+}
+
+/* ---------- Modelo (réplica de scikit-learn) ---------- */
+const M = D.modelo;
+function predecir(p) {
+  const z = M.intercepto.slice();
+  for (const f of ["Sexo", "Ocupacion", "Agente"]) {
+    const info = M.columnas[f];
+    const col = p[f] in info.mapa ? info.mapa[p[f]] : info.infrecuente;
+    if (col != null) for (let c = 0; c < z.length; c++) z[c] += M.coef[c][col];
+  }
+  const za = (p.Edad - M.edad.media) / M.edad.escala;
+  for (let c = 0; c < z.length; c++) z[c] += M.coef[c][M.edad.col] * za;
+  const mx = Math.max(...z);
+  const e = z.map((v) => Math.exp(v - mx));
+  const s = e.reduce((a, b) => a + b, 0);
+  return e.map((v) => v / s);
+}
+function topLesiones(p, k) {
+  const probs = predecir(p);
+  return M.clases.map((c, i) => ({ lesion: c, prob: probs[i], prev: D.prevalencia[c] || 1e-9 }))
+    .map((r) => ({ ...r, razon: r.prob / r.prev }))
+    .sort((a, b) => b.prob - a.prob).slice(0, k);
+}
+
+/* ---------- Índices de datos agregados ---------- */
+const OAL = D.oal; // [ocup, agente, lesion, n]
+const agentesPorOcup = new Map();
+const casosOcup = new Map();
+for (const [o, a, , n] of OAL) {
+  if (!agentesPorOcup.has(o)) agentesPorOcup.set(o, new Map());
+  const m = agentesPorOcup.get(o); m.set(a, (m.get(a) || 0) + n);
+  casosOcup.set(o, (casosOcup.get(o) || 0) + n);
+}
+const casosAgente = new Map();
+for (const [, a, , n] of OAL) casosAgente.set(a, (casosAgente.get(a) || 0) + n);
+
+/* ---------- Gráficos ---------- */
+function anchoDe(cont, def) { const w = cont.clientWidth; return w > 0 ? Math.max(300, Math.round(w)) : def; }
+function barrasH(cont, filas, { series, max, fmt = (v) => fmtN.format(Math.round(v)), ancho = 640, etiqueta = 190 }) {
+  ancho = anchoDe(cont, ancho); etiqueta = Math.min(etiqueta, Math.round(ancho * 0.42));
+  // filas: [{nombre, valores:[...]}]; series: [{nombre,color}]
+  const nS = series.length, alto = nS === 1 ? 22 : 30, gapG = 10;
+  const h = filas.length * (alto + gapG) + 24;
+  const x0 = etiqueta, x1 = ancho - 56;
+  const vmax = max || Math.max(...filas.flatMap((f) => f.valores)) || 1;
+  const X = (v) => x0 + (v / vmax) * (x1 - x0);
+  const svg = sv("svg", { viewBox: `0 0 ${ancho} ${h}`, role: "img" });
+  const grid = sv("g", { class: "grid axis" });
+  const crudo = vmax / 4, mag = Math.pow(10, Math.floor(Math.log10(crudo)));
+  const paso = [1, 2, 2.5, 5, 10].map((k) => k * mag).find((k) => k >= crudo);
+  for (let v = 0; v <= vmax + 1e-9; v += paso) {
+    const x = X(v);
+    grid.append(sv("line", { x1: x, x2: x, y1: 0, y2: h - 20 }));
+    const t = sv("text", { x, y: h - 6, "text-anchor": "middle" }); t.textContent = fmt(v, true); grid.append(t);
+  }
+  svg.append(grid);
+  const g = sv("g");
+  filas.forEach((f, i) => {
+    const y = i * (alto + gapG);
+    const t = sv("text", { x: x0 - 8, y: y + alto / 2 + 4, "text-anchor": "end" });
+    t.textContent = corta(f.nombre, Math.floor(etiqueta / 6.2)); g.append(t);
+    const bh = (alto - (nS - 1) * 2) / nS;
+    f.valores.forEach((v, j) => {
+      const by = y + j * (bh + 2), w = Math.max(1, X(v) - x0);
+      g.append(sv("rect", { class: "mark", x: x0, y: by, width: w, height: bh, rx: Math.min(4, bh / 2), fill: series[j].color }));
+    });
+    const vt = sv("text", { x: X(Math.max(...f.valores)) + 6, y: y + (nS === 1 ? alto / 2 + 4 : bh - 1 + 4), style: "fill:var(--ink);font-family:var(--mono);font-size:10.5px" });
+    vt.textContent = fmt(f.valores[0]); g.append(vt);
+    const hit = sv("rect", { class: "hit", x: 0, y: y - gapG / 2, width: ancho, height: alto + gapG });
+    conTip(hit, f.nombre, f.valores.map((v, j) => [series[j].color, fmt(v), nS > 1 ? series[j].nombre : null]));
+    g.append(hit);
+  });
+  svg.append(g);
+  svg.append(sv("line", { class: "base", x1: x0, x2: x0, y1: 0, y2: h - 20 }));
+  cont.replaceChildren(svg);
+}
+
+function lineas(cont, xs, series, { ancho = 900, alto = 300 } = {}) {
+  ancho = anchoDe(cont, ancho); alto = Math.max(240, Math.min(alto, ancho * 0.55));
+  const m = { l: 44, r: 16, t: 12, b: 28 };
+  const vmax = Math.max(0.05, ...series.flatMap((s) => s.valores)) * 1.1;
+  const X = (i) => m.l + (i / Math.max(1, xs.length - 1)) * (ancho - m.l - m.r);
+  const Y = (v) => alto - m.b - (v / vmax) * (alto - m.t - m.b);
+  const svg = sv("svg", { viewBox: `0 0 ${ancho} ${alto}`, role: "img" });
+  const grid = sv("g", { class: "grid axis" });
+  const paso = vmax > 0.4 ? 0.1 : 0.05;
+  for (let v = 0; v <= vmax; v += paso) {
+    grid.append(sv("line", { x1: m.l, x2: ancho - m.r, y1: Y(v), y2: Y(v) }));
+    const t = sv("text", { x: m.l - 6, y: Y(v) + 3.5, "text-anchor": "end" }); t.textContent = Math.round(v * 100) + "%"; grid.append(t);
+  }
+  xs.forEach((x, i) => { const t = sv("text", { x: X(i), y: alto - 8, "text-anchor": "middle" }); t.textContent = x; grid.append(t); });
+  svg.append(grid);
+  series.forEach((s) => {
+    const d = s.valores.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("");
+    svg.append(sv("path", { d, fill: "none", stroke: s.color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    s.valores.forEach((v, i) => svg.append(sv("circle", { cx: X(i), cy: Y(v), r: 3.5, fill: s.color, stroke: "var(--surface)", "stroke-width": 2 })));
+  });
+  const cross = sv("line", { y1: m.t, y2: alto - m.b, stroke: "var(--ink-3)", "stroke-width": 1, visibility: "hidden" });
+  svg.append(cross);
+  const hit = sv("rect", { class: "hit", x: m.l - 10, y: 0, width: ancho - m.l - m.r + 20, height: alto });
+  hit.addEventListener("pointermove", (e) => {
+    const b = svg.getBoundingClientRect();
+    const px = ((e.clientX - b.left) / b.width) * ancho;
+    const i = Math.max(0, Math.min(xs.length - 1, Math.round(((px - m.l) / (ancho - m.l - m.r)) * (xs.length - 1))));
+    cross.setAttribute("x1", X(i)); cross.setAttribute("x2", X(i)); cross.setAttribute("visibility", "visible");
+    const filas = series.map((s) => [s.color, pct(s.valores[i]), corta(s.nombre, 40), s.valores[i]]).sort((a, b) => b[3] - a[3]);
+    mostrarTip(e, String(xs[i]), filas);
+  });
+  hit.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); ocultarTip(); });
+  svg.append(hit);
+  cont.replaceChildren(svg);
+}
+
+function mapaCalor(cont, filas, cols, valor, conteo) {
+  const cw = 64, ch = 30, izq = 250, arriba = 120;
+  const ancho = izq + cols.length * cw + 8, alto = arriba + filas.length * ch + 4;
+  const svg = sv("svg", { viewBox: `0 0 ${ancho} ${alto}`, role: "img", style: `min-width:${Math.min(ancho, 760)}px` });
+  cols.forEach((c, j) => {
+    const x = izq + j * cw + cw / 2;
+    const t = sv("text", { x, y: arriba - 8, transform: `rotate(-38 ${x} ${arriba - 8})` });
+    t.textContent = corta(c, 30); svg.append(t);
+  });
+  filas.forEach((f, i) => {
+    const y = arriba + i * ch;
+    const t = sv("text", { x: izq - 8, y: y + ch / 2 + 4, "text-anchor": "end" }); t.textContent = corta(f, 40); svg.append(t);
+    cols.forEach((c, j) => {
+      const v = valor(f, c), x = izq + j * cw;
+      const r = sv("rect", { x: x + 1, y: y + 1, width: cw - 2, height: ch - 2, rx: 3, fill: "var(--s1)", "fill-opacity": (0.06 + 0.94 * Math.min(1, v / 0.6)).toFixed(3) });
+      svg.append(r);
+      const tt = sv("text", { x: x + cw / 2, y: y + ch / 2 + 4, "text-anchor": "middle", style: `font-family:var(--mono);font-size:10.5px;fill:${v > 0.3 ? "#fff" : "var(--ink-2)"}` });
+      tt.textContent = v >= 0.005 ? Math.round(v * 100) + "%" : "·"; svg.append(tt);
+      const hit = sv("rect", { class: "hit", x, y, width: cw, height: ch });
+      conTip(hit, f, [["var(--s1)", pct(v), `${corta(c, 34)} · ${fmtN.format(conteo(f, c))} casos`]]);
+      svg.append(hit);
+    });
+  });
+  cont.replaceChildren(svg);
+}
+
+function dispersion(cont, puntos, { ancho = 900, alto = 380 }) {
+  ancho = anchoDe(cont, ancho); alto = Math.max(300, Math.min(alto, ancho * 0.7));
+  const m = { l: 48, r: 20, t: 14, b: 40 };
+  const xs = puntos.map((p) => p.x), ys = puntos.map((p) => p.y);
+  const lx0 = Math.log10(Math.min(...xs) * 0.9), lx1 = Math.log10(Math.max(...xs) * 1.1);
+  const ymax = Math.max(0.1, ...ys) * 1.1;
+  const X = (v) => m.l + ((Math.log10(v) - lx0) / (lx1 - lx0)) * (ancho - m.l - m.r);
+  const Y = (v) => alto - m.b - (v / ymax) * (alto - m.t - m.b);
+  const svg = sv("svg", { viewBox: `0 0 ${ancho} ${alto}`, role: "img" });
+  const grid = sv("g", { class: "grid axis" });
+  for (let v = 0; v <= ymax; v += 0.1) {
+    grid.append(sv("line", { x1: m.l, x2: ancho - m.r, y1: Y(v), y2: Y(v) }));
+    const t = sv("text", { x: m.l - 6, y: Y(v) + 3.5, "text-anchor": "end" }); t.textContent = Math.round(v * 100) + "%"; grid.append(t);
+  }
+  for (const v of [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]) {
+    if (Math.log10(v) < lx0 || Math.log10(v) > lx1) continue;
+    grid.append(sv("line", { x1: X(v), x2: X(v), y1: m.t, y2: alto - m.b }));
+    const t = sv("text", { x: X(v), y: alto - m.b + 16, "text-anchor": "middle" }); t.textContent = fmtN.format(v); grid.append(t);
+  }
+  const tx = sv("text", { x: (ancho + m.l) / 2, y: alto - 4, "text-anchor": "middle" }); tx.textContent = "Casos (escala logarítmica)"; grid.append(tx);
+  svg.append(grid);
+  const ty = sv("text", { x: 12, y: m.t + 4, style: "font-size:10.5px" });
+  svg.append(ty);
+  const top5 = [...puntos].sort((a, b) => b.y * Math.log10(b.x) - a.y * Math.log10(a.x)).slice(0, 4).map((p) => p.nombre);
+  puntos.forEach((p) => {
+    const r = 4 + Math.sqrt(p.x) / 8;
+    const g = sv("g");
+    g.append(sv("circle", { class: "mark", cx: X(p.x), cy: Y(p.y), r: Math.min(r, 16), fill: "var(--s1)", "fill-opacity": 0.55, stroke: "var(--s1)", "stroke-width": 1.5 }));
+    if (top5.includes(p.nombre)) {
+      const t = sv("text", { x: X(p.x) + Math.min(r, 16) + 4, y: Y(p.y) + 4, style: "fill:var(--ink);font-size:10.5px" });
+      t.textContent = corta(p.nombre, 34); g.append(t);
+    }
+    const hit = sv("circle", { class: "hit", cx: X(p.x), cy: Y(p.y), r: Math.max(12, Math.min(r, 16) + 4) });
+    conTip(hit, p.nombre, [["var(--s1)", pct(p.y), "vulnerabilidad"], [null, fmtN.format(p.x), "casos"]]);
+    g.append(hit);
+    svg.append(g);
+  });
+  cont.replaceChildren(svg);
+}
+
+function tabla(t, columnas, filas, { ordenable = false, orden } = {}) {
+  let estado = orden || null;
+  function pintar() {
+    let datos = filas;
+    if (estado) {
+      const { i, dir } = estado;
+      datos = [...filas].sort((a, b) => {
+        const x = a[i], y = b[i];
+        const r = typeof x === "number" ? x - y : String(x).localeCompare(String(y), "es");
+        return dir === "asc" ? r : -r;
+      });
+    }
+    const head = el("tr", {}, ...columnas.map((c, i) => {
+      const th = el("th", { class: c.num ? "n" : "", scope: "col" });
+      if (ordenable) {
+        const b = el("button", { type: "button", text: c.nombre });
+        if (estado && estado.i === i) b.dataset.dir = estado.dir;
+        b.addEventListener("click", () => { estado = { i, dir: estado && estado.i === i && estado.dir === "desc" ? "asc" : "desc" }; pintar(); });
+        th.append(b);
+      } else th.textContent = c.nombre;
+      return th;
+    }));
+    const body = datos.map((f) => el("tr", {}, ...columnas.map((c, i) => el("td", { class: c.num ? "n" : "", text: c.fmt ? c.fmt(f[i]) : f[i] }))));
+    t.replaceChildren(el("thead", {}, head), el("tbody", {}, ...body));
+  }
+  pintar();
+}
+
+/* ---------- Cabecera ---------- */
+(function cabecera() {
+  const s = $("#stamp");
+  const fila = (k, v) => [el("span", { text: k }), el("b", { text: v })];
+  s.append(...fila("Casos", fmtN.format(D.n)), ...fila("Periodo", `${D.anios[0]}–${D.anios[1]}`),
+    ...fila("Ocupaciones", fmtN.format(DIC.Ocupacion.length)), ...fila("Agentes", fmtN.format(DIC.Agente.length)));
+})();
+
+/* ---------- Pestaña: predicción ---------- */
+const ocupOrden = [...casosOcup.entries()].sort((a, b) => b[1] - a[1]).map(([o]) => o);
+opciones($("#sexo"), DIC.Sexo);
+$("#sexo").value = "Femenino";
+opciones($("#ocupacion"), ocupOrden, (o) => DIC.Ocupacion[o]);
+
+function llenarAgentes() {
+  const o = +$("#ocupacion").value, previo = $("#agente").value;
+  const lista = $("#solo-reg").checked
+    ? [...agentesPorOcup.get(o).entries()].sort((a, b) => b[1] - a[1]).map(([a]) => a)
+    : [...casosAgente.entries()].sort((a, b) => b[1] - a[1]).map(([a]) => a);
+  opciones($("#agente"), lista, (a) => DIC.Agente[a]);
+  if (lista.map(String).includes(previo)) $("#agente").value = previo;
+}
+
+function alerta(tipo, ico, texto) { return el("div", { class: `alert ${tipo}` }, el("span", { class: "ico", text: ico }), el("span", { text: texto })); }
+
+function renderPrediccion() {
+  const edad = +$("#edad").value, k = +$("#k").value;
+  $("#edad-val").textContent = edad; $("#k-val").textContent = k;
+  const o = +$("#ocupacion").value, a = +$("#agente").value;
+  const perfil = { Edad: edad, Sexo: $("#sexo").value, Ocupacion: DIC.Ocupacion[o], Agente: DIC.Agente[a] };
+  const t = topLesiones(perfil, k);
+
+  const al = [];
+  if (edad < 18) al.push(alerta("crit", "!", "Menor de edad. En Colombia el trabajo de adolescentes requiere autorización y está prohibido en actividades peligrosas. Considera activar la ruta de protección."));
+  else if (edad >= 65) al.push(alerta("info", "i", "Adulto mayor trabajando en la informalidad: mayor vulnerabilidad y menos acceso a protección social."));
+  $("#alertas").replaceChildren(...al);
+
+  $("#ranking").replaceChildren(...t.map((r, i) => {
+    const sube = r.razon >= 1;
+    return el("li", {},
+      el("span", { class: "pos", text: String(i + 1).padStart(2, "0") }),
+      el("span", { class: "name", text: r.lesion }),
+      el("span", { class: "prob num", text: pct(r.prob) }),
+      el("span", { class: "bar" }, el("i", { style: `width:${(r.prob * 100).toFixed(1)}%` })),
+      el("span", { class: "lift" },
+        el("span", { class: `chip ${sube ? "up" : ""}`, text: `${r.razon.toFixed(1).replace(".", ",")}×` }),
+        " ", sube ? "más frecuente que en el total de casos" : "menos frecuente que en el total de casos"));
+  }));
+
+  barrasH($("#ch-perfil"), t.map((r) => ({ nombre: r.lesion, valores: [r.prob, r.prev] })), {
+    series: [{ nombre: "Este perfil", color: "var(--s1)" }, { nombre: "Todos los casos", color: "var(--ref)" }],
+    fmt: (v, eje) => eje ? Math.round(v * 100) + "%" : pct(v), etiqueta: 230,
+  });
+
+  const sim = OAL.filter((f) => f[0] === o && f[1] === a).sort((x, y) => y[3] - x[3]);
+  const n = sim.reduce((s, f) => s + f[3], 0);
+  $("#sim-titulo").textContent = `${fmtN.format(n)} casos reales con la misma ocupación y agente`;
+  const aviso = [];
+  if (n === 0) aviso.push(alerta("warn", "!", "No hay casos registrados con esta combinación: la predicción es una extrapolación del modelo."));
+  else if (n < 30) aviso.push(alerta("warn", "!", "Pocos casos: interpreta la distribución observada con cautela."));
+  $("#sim-aviso").replaceChildren(...aviso);
+  tabla($("#sim-tabla"), [{ nombre: "Lesión registrada" }, { nombre: "Casos", num: true, fmt: (v) => fmtN.format(v) }, { nombre: "%", num: true, fmt: (v) => pct(v) }],
+    sim.slice(0, k).map((f) => [DIC.Lesion[f[2]], f[3], f[3] / n]));
+}
+$("#ocupacion").addEventListener("change", () => { llenarAgentes(); renderPrediccion(); });
+$("#solo-reg").addEventListener("change", () => { llenarAgentes(); renderPrediccion(); });
+for (const id of ["#edad", "#k"]) $(id).addEventListener("input", renderPrediccion);
+for (const id of ["#sexo", "#agente"]) $(id).addEventListener("change", renderPrediccion);
+$("#ficha").addEventListener("submit", (e) => e.preventDefault());
+llenarAgentes();
+renderPrediccion();
+
+/* ---------- Pestaña: lotes ---------- */
+function parseCSV(texto) {
+  texto = texto.replace(/^﻿/, "");
+  const primera = texto.split(/\r?\n/, 1)[0];
+  const sep = (primera.match(/;/g) || []).length > (primera.match(/,/g) || []).length ? ";" : ",";
+  const filas = []; let fila = [], campo = "", comillas = false;
+  for (let i = 0; i < texto.length; i++) {
+    const c = texto[i];
+    if (comillas) {
+      if (c === '"') { if (texto[i + 1] === '"') { campo += '"'; i++; } else comillas = false; }
+      else campo += c;
+    } else if (c === '"') comillas = true;
+    else if (c === sep) { fila.push(campo); campo = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && texto[i + 1] === "\n") i++;
+      fila.push(campo); campo = ""; if (fila.some((x) => x.trim() !== "")) filas.push(fila); fila = [];
+    } else campo += c;
+  }
+  fila.push(campo); if (fila.some((x) => x.trim() !== "")) filas.push(fila);
+  return filas;
+}
+const sinTilde = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim();
+const csvCampo = (v) => { const s = String(v); return /[",;\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+
+function procesarLotes(texto) {
+  const msg = $("#lotes-msg"); msg.replaceChildren(); $("#lotes-res").hidden = true;
+  const filas = parseCSV(texto);
+  if (filas.length < 2) { msg.append(alerta("warn", "!", "El archivo está vacío o solo tiene encabezados.")); return; }
+  const enc = filas[0].map(sinTilde);
+  const idx = {}; const faltan = [];
+  for (const c of ["Edad", "Sexo", "Ocupacion", "Agente"]) {
+    const i = enc.indexOf(sinTilde(c)); if (i < 0) faltan.push(c); else idx[c] = i;
+  }
+  if (faltan.length) { msg.append(alerta("warn", "!", `Faltan columnas: ${faltan.join(", ")}. Revisa que el encabezado use esos nombres.`)); return; }
+  const conocidasO = new Set(DIC.Ocupacion), conocidosA = new Set(DIC.Agente);
+  const salida = []; let desconocidas = 0, edadMala = 0;
+  for (const f of filas.slice(1)) {
+    const p = { Edad: parseFloat(String(f[idx.Edad] || "").replace(",", ".")), Sexo: (f[idx.Sexo] || "").trim(), Ocupacion: (f[idx.Ocupacion] || "").trim(), Agente: (f[idx.Agente] || "").trim() };
+    if (!isFinite(p.Edad)) { edadMala++; p.Edad = M.edad.media; }
+    const conocida = conocidasO.has(p.Ocupacion) && conocidosA.has(p.Agente);
+    if (!conocida) desconocidas++;
+    const t = topLesiones(p, 3);
+    salida.push([p.Edad, p.Sexo, p.Ocupacion, p.Agente, t[0].lesion, t[0].prob, t[1].lesion, t[1].prob, t[2].lesion, t[2].prob, conocida ? "Sí" : "No"]);
+  }
+  const cols = ["Edad", "Sexo", "Ocupacion", "Agente", "Lesion_1", "Prob_1", "Lesion_2", "Prob_2", "Lesion_3", "Prob_3", "Categorias_conocidas"];
+  const esProb = (i) => i === 5 || i === 7 || i === 9;
+  tabla($("#lotes-tabla"), cols.map((c, i) => ({ nombre: c.replace("_", " "), num: i === 0 || esProb(i), fmt: esProb(i) ? (v) => pct(v) : null })), salida, { ordenable: true });
+  $("#lotes-titulo").textContent = `${fmtN.format(salida.length)} trabajadores procesados`;
+  $("#lotes-csv").value = [cols.join(","), ...salida.map((f) => f.map((v, i) => csvCampo(esProb(i) ? v.toFixed(3) : v)).join(","))].join("\n");
+  $("#lotes-csv").hidden = true;
+  $("#lotes-res").hidden = false;
+  if (desconocidas) msg.append(alerta("warn", "!", `${fmtN.format(desconocidas)} filas tienen una ocupación o un agente que no aparece en los datos; su predicción es poco fiable.`));
+  if (edadMala) msg.append(alerta("warn", "!", `${fmtN.format(edadMala)} filas no tenían una edad válida; se usó la edad media (${Math.round(M.edad.media)}).`));
+}
+$("#archivo").addEventListener("change", (e) => { const f = e.target.files[0]; if (f) leerArchivo(f); });
+function leerArchivo(f) {
+  const r = new FileReader();
+  r.onload = () => {
+    let t = r.result;
+    if (t.includes("\uFFFD")) { const r2 = new FileReader(); r2.onload = () => procesarLotes(r2.result); r2.readAsText(f, "latin1"); return; }
+    procesarLotes(t);
+  };
+  r.readAsText(f, "utf-8");
+}
+const drop = $("#drop");
+drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+drop.addEventListener("drop", (e) => { e.preventDefault(); drop.classList.remove("over"); const f = e.dataTransfer.files[0]; if (f) leerArchivo(f); });
+$("#ejemplo").addEventListener("click", () => {
+  const ej = [["Edad", "Sexo", "Ocupacion", "Agente"],
+    [45, "Femenino", "Peluqueros, Especialistas En Tratamientos De Belleza Y Afines", "Movimientos Repetitivos De Mmss"],
+    [38, "Masculino", "Mecánicos Y Ajustadores De Vehículos De Motor", "Exposición A Otras Sustancias Químicas"],
+    [61, "Femenino", "Vendedores Y Demostradores De Tiendas, Almacenes Y Afines", "Bipedestación Prolongada"],
+    [52, "Masculino", "Cocineros Y Afines", "Bipedestación Prolongada"],
+    [16, "Masculino", "Lavadores De Vehículos, Ventanas Y Afines", "Posturas Forzadas (En Cuclillas O Flexionado)"],
+    [70, "Femenino", "Sastres, Modistos, Costureros, Sombrereros Y Afines", "Movimientos Repetitivos De Mmss"]];
+  procesarLotes(ej.map((f) => f.map(csvCampo).join(",")).join("\n"));
+});
+$("#copiar").addEventListener("click", async () => {
+  const ta = $("#lotes-csv"), b = $("#copiar");
+  try { await navigator.clipboard.writeText(ta.value); b.textContent = "Copiado"; }
+  catch { ta.hidden = false; ta.focus(); ta.select(); b.textContent = "Selecciona y copia el texto"; }
+  setTimeout(() => (b.textContent = "Copiar resultados como CSV"), 2500);
+});
+
+/* ---------- Pestaña: vigilancia ---------- */
+const anios = []; for (let y = D.anios[0]; y <= D.anios[1]; y++) anios.push(y);
+opciones($("#v-desde"), anios); opciones($("#v-hasta"), anios);
+$("#v-desde").value = anios[0]; $("#v-hasta").value = anios[anios.length - 1];
+opciones($("#v-loc"), ["", ...DIC.Localidad.map((_, i) => i).sort((a, b) => DIC.Localidad[a].localeCompare(DIC.Localidad[b], "es"))], (v) => v === "" ? "Todas" : DIC.Localidad[v]);
+opciones($("#v-sexo"), ["", ...DIC.Sexo.map((_, i) => i)], (v) => v === "" ? "Todos" : DIC.Sexo[v]);
+
+function filtroV() {
+  let d = +$("#v-desde").value, h = +$("#v-hasta").value; if (d > h) [d, h] = [h, d];
+  const loc = $("#v-loc").value, sx = $("#v-sexo").value;
+  return (f) => f[0] >= d && f[0] <= h && (loc === "" || f[1] === +loc) && (sx === "" || f[2] === +sx);
+}
+function sumar(filas, clave) { const m = new Map(); for (const f of filas) { const k = clave(f); m.set(k, (m.get(k) || 0) + f[f.length - 1]); } return m; }
+
+function renderVigilancia() {
+  const ok = filtroV();
+  const L = D.cuboLesion.filter(ok), A = D.cuboAgente.filter(ok), O = D.cuboOcup.filter(ok);
+  const total = L.reduce((s, f) => s + f[4], 0);
+  const porLes = [...sumar(L, (f) => f[3]).entries()].sort((a, b) => b[1] - a[1]);
+  const porAg = [...sumar(A, (f) => f[3]).entries()].sort((a, b) => b[1] - a[1]);
+  $("#v-kpis").replaceChildren(
+    el("div", { class: "kpi" }, el("span", { class: "label", text: "Casos" }), el("b", { text: fmtN.format(total) })),
+    el("div", { class: "kpi" }, el("span", { class: "label", text: "Lesión principal" }), el("span", { style: "font-weight:600", text: porLes[0] ? `${DIC.Lesion[porLes[0][0]]} · ${pct(porLes[0][1] / total)}` : "—" })),
+    el("div", { class: "kpi" }, el("span", { class: "label", text: "Agente principal" }), el("span", { style: "font-weight:600", text: porAg[0] ? `${DIC.Agente[porAg[0][0]]} · ${pct(porAg[0][1] / total)}` : "—" })));
+  if (!total) {
+    for (const id of ["#ch-lesiones", "#ch-agentes", "#ch-tendencia", "#ch-heat"]) $(id).replaceChildren(el("p", { class: "muted small", text: "Sin casos para esta selección." }));
+    $("#lg-tendencia").replaceChildren(); return;
+  }
+  const serie1 = [{ nombre: "Casos", color: "var(--s1)" }];
+  barrasH($("#ch-lesiones"), porLes.slice(0, 10).map(([k, n]) => ({ nombre: DIC.Lesion[k], valores: [n] })), { series: serie1, ancho: 560, etiqueta: 200 });
+  barrasH($("#ch-agentes"), porAg.slice(0, 10).map(([k, n]) => ({ nombre: DIC.Agente[k], valores: [n] })), { series: serie1, ancho: 560, etiqueta: 200 });
+
+  // Tendencia: 5 lesiones principales, color fijo por lesión (por su rango en el total histórico)
+  const xs = [...new Set(L.map((f) => f[0]))].sort();
+  const totAnio = sumar(L, (f) => f[0]);
+  const principales = porLes.slice(0, 5).map(([k]) => k);
+  const series = principales.map((k) => {
+    const m = sumar(L.filter((f) => f[3] === k), (f) => f[0]);
+    return { nombre: DIC.Lesion[k], color: colorLesion(k), valores: xs.map((y) => (m.get(y) || 0) / (totAnio.get(y) || 1)) };
+  });
+  $("#lg-tendencia").replaceChildren(...series.map((s) => el("span", {}, el("i", { class: "ln", style: `background:${s.color}` }), s.nombre)));
+  lineas($("#ch-tendencia"), xs, series);
+
+  const porOcup = [...sumar(O, (f) => f[3]).entries()].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k]) => k);
+  const lesCols = porLes.slice(0, 10).map(([k]) => k);
+  const cruce = sumar(O, (f) => f[3] + "|" + f[4]);
+  const totO = sumar(O, (f) => f[3]);
+  mapaCalor($("#ch-heat"), porOcup.map((o) => DIC.Ocupacion[o]), lesCols.map((l) => DIC.Lesion[l]),
+    (fo, cl) => { const o = DIC.Ocupacion.indexOf(fo), l = DIC.Lesion.indexOf(cl); return (cruce.get(o + "|" + l) || 0) / (totO.get(o) || 1); },
+    (fo, cl) => cruce.get(DIC.Ocupacion.indexOf(fo) + "|" + DIC.Lesion.indexOf(cl)) || 0);
+}
+// El color sigue a la lesión, no a su posición en el filtro actual
+const rangoHistorico = [...sumar(D.cuboLesion, (f) => f[3]).entries()].sort((a, b) => b[1] - a[1]).map(([k]) => k);
+const colorAsignado = new Map();
+function colorLesion(k) {
+  if (!colorAsignado.has(k)) {
+    const libres = SERIES.filter((c) => ![...colorAsignado.values()].includes(c));
+    const r = rangoHistorico.indexOf(k);
+    colorAsignado.set(k, r < SERIES.length && !([...colorAsignado.values()].includes(SERIES[r])) ? SERIES[r] : (libres[0] || "var(--ink-3)"));
+  }
+  return colorAsignado.get(k);
+}
+rangoHistorico.slice(0, 5).forEach(colorLesion);
+for (const id of ["#v-desde", "#v-hasta", "#v-loc", "#v-sexo"]) $(id).addEventListener("change", renderVigilancia);
+
+/* ---------- Pestaña: priorización ---------- */
+// [ocupacion, casos, noAseg, bajo1, destajo, mayor65, menores, lesion, agente]
+const V = D.vulnerabilidad.map((f) => ({ o: f[0], casos: f[1], noAseg: f[2], bajo1: f[3], destajo: f[4], mayor65: f[5], menores: f[6], lesion: f[7], agente: f[8], indice: (f[2] + f[3] + f[5]) / 3 }));
+function renderPriorizacion() {
+  const min = +$("#p-min").value; $("#p-min-val").textContent = min;
+  const sel = V.filter((v) => v.casos >= min);
+  dispersion($("#ch-scatter"), sel.map((v) => ({ nombre: v.o, x: v.casos, y: v.indice })), {});
+  const p0 = (v) => pct(v, 0);
+  tabla($("#p-tabla"), [
+    { nombre: "Ocupación" }, { nombre: "Casos", num: true, fmt: (v) => fmtN.format(v) }, { nombre: "Índice", num: true, fmt: p0 },
+    { nombre: "% no asegurado", num: true, fmt: p0 }, { nombre: "% < 1 SMMLV", num: true, fmt: p0 }, { nombre: "% a destajo", num: true, fmt: p0 },
+    { nombre: "% ≥ 65", num: true, fmt: p0 }, { nombre: "Menores", num: true }, { nombre: "Lesión principal" }, { nombre: "Agente principal" },
+  ], sel.map((v) => [v.o, v.casos, v.indice, v.noAseg, v.bajo1, v.destajo, v.mayor65, v.menores, v.lesion, v.agente]), { ordenable: true, orden: { i: 2, dir: "desc" } });
+}
+$("#p-min").addEventListener("input", renderPriorizacion);
+
+(function menores() {
+  const lista = V.filter((v) => v.menores > 0).sort((a, b) => b.menores - a.menores);
+  const n = lista.reduce((s, v) => s + v.menores, 0);
+  const c = $("#menores");
+  c.append(el("div", { class: "card-head" }, el("h3", { text: `${fmtN.format(n)} casos en menores de 18 años` }), el("span", { class: "label", text: "Posible trabajo infantil o adolescente" })));
+  c.append(el("p", { class: "small muted", text: "Se muestran agregados por ocupación para proteger la identidad de los menores. El detalle por caso está en la base original, con acceso restringido." }));
+  const w = el("div", { class: "tbl-wrap" }, el("table", { id: "menores-tabla" })); c.append(w);
+  tabla(w.firstChild, [{ nombre: "Ocupación" }, { nombre: "Casos en menores", num: true }, { nombre: "Lesión principal de la ocupación" }], lista.map((v) => [v.o, v.menores, v.lesion]));
+})();
+
+/* ---------- Pestaña: confiabilidad ---------- */
+(function confiabilidad() {
+  const ev = D.evaluacion;
+  tabla($("#c-tabla"), [
+    { nombre: "Validación" }, { nombre: "Método" }, { nombre: "Casos de prueba", num: true, fmt: (v) => fmtN.format(v) },
+    { nombre: "Acierto 1ª opción", num: true, fmt: (v) => pct(v) }, { nombre: "Acierto en top 3", num: true, fmt: (v) => pct(v) }, { nombre: "Log-loss (menor es mejor)", num: true, fmt: (v) => v.toFixed(2).replace(".", ",") },
+  ], ev.map((r) => [r["Validación"], r["Método"], r.n, r.top1, r.top3, r.log_loss]));
+  const temp = ev.filter((r) => r["Validación"].startsWith("Temporal"));
+  const mod = temp.find((r) => r["Método"] === "Modelo"), base = temp.find((r) => r["Método"] !== "Modelo");
+  $("#c-texto").textContent = `La validación temporal entrena con los años anteriores a ${D.corteTemporal} y prueba con los siguientes. Es la cifra realista: el modelo acierta la primera opción en ${pct(mod.top1)} de los casos y la tiene entre sus 3 primeras en ${pct(mod.top3)}, frente a ${pct(base.top1)} y ${pct(base.top3)} de la línea base. Baja frente a la validación aleatoria porque la forma de registrar cambia entre años.`;
+})();
+function confiabilidadGraf() {
+  const genericas = new Set(DIC.Lesion.map((l, i) => (l.startsWith("Otr") ? i : -1)).filter((i) => i >= 0));
+  const tot = sumar(D.cuboLesion, (f) => f[0]);
+  const gen = sumar(D.cuboLesion.filter((f) => genericas.has(f[3])), (f) => f[0]);
+  const xs = [...tot.keys()].sort();
+  barrasVert($("#ch-genericas"), xs, xs.map((y) => (gen.get(y) || 0) / tot.get(y)), xs.map((y) => tot.get(y)));
+}
+
+function barrasVert(cont, xs, vals, ns) {
+  const ancho = anchoDe(cont, 520), alto = 240, m = { l: 40, r: 8, t: 18, b: 26 };
+  const vmax = Math.max(...vals) * 1.15;
+  const bw = (ancho - m.l - m.r) / xs.length;
+  const Y = (v) => alto - m.b - (v / vmax) * (alto - m.t - m.b);
+  const svg = sv("svg", { viewBox: `0 0 ${ancho} ${alto}`, role: "img" });
+  const grid = sv("g", { class: "grid axis" });
+  for (let v = 0; v <= vmax; v += 0.2) {
+    grid.append(sv("line", { x1: m.l, x2: ancho - m.r, y1: Y(v), y2: Y(v) }));
+    const t = sv("text", { x: m.l - 6, y: Y(v) + 3.5, "text-anchor": "end" }); t.textContent = Math.round(v * 100) + "%"; grid.append(t);
+  }
+  svg.append(grid);
+  const imax = vals.indexOf(Math.max(...vals));
+  xs.forEach((x, i) => {
+    const bx = m.l + i * bw + 2, w = bw - 4, y = Y(vals[i]), h = alto - m.b - y;
+    svg.append(sv("path", { class: "mark", fill: "var(--s1)", d: `M${bx},${alto - m.b}V${y + 4}q0,-4 4,-4h${w - 8}q4,0 4,4V${alto - m.b}Z` }));
+    const t = sv("text", { x: bx + w / 2, y: alto - 8, "text-anchor": "middle", class: "" }); t.textContent = x; t.style.cssText = "font:10.5px var(--mono);fill:var(--ink-3)"; svg.append(t);
+    if (i === imax) { const v = sv("text", { x: bx + w / 2, y: y - 5, "text-anchor": "middle", style: "fill:var(--ink);font:500 10.5px var(--mono)" }); v.textContent = pct(vals[i], 0); svg.append(v); }
+    const hit = sv("rect", { class: "hit", x: bx - 2, y: m.t, width: bw, height: alto - m.t - m.b });
+    conTip(hit, String(x), [["var(--s1)", pct(vals[i]), `de ${fmtN.format(ns[i])} casos`]]);
+    svg.append(hit);
+  });
+  svg.append(sv("line", { class: "base", x1: m.l, x2: ancho - m.r, y1: alto - m.b, y2: alto - m.b }));
+  cont.replaceChildren(svg);
+}
+
+/* ---------- Navegación ---------- */
+let actual = "prediccion", tResize;
+addEventListener("resize", () => {
+  clearTimeout(tResize);
+  tResize = setTimeout(() => {
+    if (actual === "prediccion") renderPrediccion();
+    if (actual === "vigilancia") renderVigilancia();
+    if (actual === "priorizacion") renderPriorizacion();
+    if (actual === "confiabilidad") confiabilidadGraf();
+  }, 150);
+});
+function abrir(tab) {
+  if (!document.getElementById("p-" + tab)) tab = "prediccion";
+  document.querySelectorAll("nav.tabs button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === tab)));
+  document.querySelectorAll("section.panel").forEach((s) => (s.hidden = s.id !== "p-" + tab));
+  actual = tab;
+  // Se dibuja al abrir: los gráficos toman el ancho real del panel visible
+  ({ prediccion: renderPrediccion, vigilancia: renderVigilancia, priorizacion: renderPriorizacion, confiabilidad: confiabilidadGraf })[tab]?.();
+  try { localStorage.setItem("pestana", tab); } catch {}
+}
+document.querySelectorAll("nav.tabs button").forEach((b) => b.addEventListener("click", () => { abrir(b.dataset.tab); history.replaceState(null, "", "#" + b.dataset.tab); }));
+let inicial = location.hash.slice(1);
+if (!inicial) { try { inicial = localStorage.getItem("pestana") || ""; } catch {} }
+abrir(inicial || "prediccion");
+</script>
